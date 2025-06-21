@@ -12,22 +12,23 @@ def main():
     print("Successfully loaded image!")
     print("Image size: " + str(image.width) + " x " + str(image.height))
 
-    image_array = transform_image_to_2d_array(image)
-    print("Successfully constructed pixel matrix!")
-    print("Pixel matrix size: " + str(len(image_array[0])) + " x " + str(len(image_array)))
+    image_bightness_array = transform_image_to_2d_brightness_array(image)
+    print("Successfully constructed brightness matrix!")
+    print("Brightness matrix size: " + str(len(image_bightness_array[0])) + " x " + str(len(image_bightness_array)))
 
-def transform_image_to_2d_array(image):
+def transform_image_to_2d_brightness_array(image):
     image_data = image.getdata()
 
-    image_array = []
+    image_bightness_array = []
 
     for y in range(0, image.height):
-        image_array.append([])
+        image_bightness_array.append([])
         for x in range(0, image.width):
-            image_array[y].append(image_data.getpixel((x,y)))
+            rgb_values = image_data.getpixel((x,y))
+            brightness_value = sum(rgb_values) / len(rgb_values)
+            image_bightness_array[y].append(brightness_value)
 
-    return image_array
-
+    return image_bightness_array
 
 if __name__ == "__main__":
     main()
