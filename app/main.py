@@ -6,15 +6,20 @@ def main():
     parser = ArgumentParser(description="A simple program that convert image to ASCII")
 
     parser.add_argument("filename", help="The image path to process")
-    parser.add_argument("width", help="The width of the ASCII art output")
-    parser.add_argument("height", help="The height of the ASCII art output")
+    parser.add_argument("-wt", "--width", help="The width of the ASCII art output")
+    parser.add_argument("-ht", "--height", help="The height of the ASCII art output")
 
     args = parser.parse_args()
 
-    image = None
+    filename = args.filename
+
+    if filename is None:
+        print("Please inform the image path.")
+        return
     
+    image = None
     try:
-        image = Image.open("example.jpg")
+        image = Image.open(filename)
     except OSError:
         print("Error while loading image!")
         return
