@@ -9,16 +9,10 @@ def main():
     except OSError:
         print("Error while loading image!")
         return
-    
-    print("Successfully loaded image!")
-    print("Image size: " + str(image.width) + " x " + str(image.height))
 
     image = image.resize((MAX_WIDTH, MAX_HEIGHT))
-
     image_array = transform_image_to_ascii_2d_array(image)
-    print("Successfully constructed ASCII image!")
-    print("image size: " + str(len(image_array[0])) + " x " + str(len(image_array)))
-
+    
     for y in range(0, image.height):
         print()
         for x in range(0, image.width):
