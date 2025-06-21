@@ -2,6 +2,8 @@ from PIL import Image
 
 char_map = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
 rgb_range = 255
+max_width = 640
+max_height = 480
 
 def main():
     image = None
@@ -14,6 +16,8 @@ def main():
     
     print("Successfully loaded image!")
     print("Image size: " + str(image.width) + " x " + str(image.height))
+
+    image = image.resize((max_width, max_height))
 
     image_array = transform_image_to_ascii_2d_array(image)
     print("Successfully constructed ASCII image!")
