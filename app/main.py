@@ -1,7 +1,16 @@
 from PIL import Image
+from argparse import ArgumentParser
 from constants import CHAR_MAP, RGB_RANGE, MAX_WIDTH, MAX_HEIGHT, CHAR_SCALE
 
 def main():
+    parser = ArgumentParser(description="A simple program that convert image to ASCII")
+
+    parser.add_argument("filename", help="The image path to process")
+    parser.add_argument("width", help="The width of the ASCII art output")
+    parser.add_argument("height", help="The height of the ASCII art output")
+
+    args = parser.parse_args()
+
     image = None
     
     try:
