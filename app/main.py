@@ -20,7 +20,7 @@ def main():
 
 
 def define_arguments():
-    parser = ArgumentParser(description="A simple program that convert image to ASCII")
+    parser = ArgumentParser(description="A simple program that converts image to ASCII")
 
     parser.add_argument("filename", help="The image path to process")
     parser.add_argument(
