@@ -7,11 +7,8 @@ from convert import transform_image_to_ascii_2d_array
 def main():
     args = define_arguments()
 
-    image = None
-    try:
-        image = Image.open(args.filename)
-    except OSError:
-        print("Error while loading image!")
+    image = validate_file(args.filename)
+    if image is None:
         return
 
     image = image.resize((int(args.width), int(args.height)))
@@ -31,6 +28,22 @@ def define_arguments():
     )
 
     return parser.parse_args()
+
+
+def validate_file(filename):
+    try:
+        with Image.open(filename) as img:
+            img.verify()
+    except (IOError, SyntaxError):
+        print("Please select a valid image file!")
+        return None
+
+    try:
+        image = Image.open(filename)
+        return image
+    except OSError:
+        print("Error while loading image!")
+        return None
 
 
 def print_ascii(image, image_array):
