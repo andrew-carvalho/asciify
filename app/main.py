@@ -6,8 +6,8 @@ def main():
     parser = ArgumentParser(description="A simple program that convert image to ASCII")
 
     parser.add_argument("filename", help="The image path to process")
-    parser.add_argument("-wt", "--width", help="The width of the ASCII art output")
-    parser.add_argument("-ht", "--height", help="The height of the ASCII art output")
+    parser.add_argument("-wt", "--width", help="The width of the ASCII art output", default=MAX_WIDTH)
+    parser.add_argument("-ht", "--height", help="The height of the ASCII art output", default=MAX_HEIGHT)
 
     args = parser.parse_args()
 
@@ -24,7 +24,7 @@ def main():
         print("Error while loading image!")
         return
 
-    image = image.resize((MAX_WIDTH, MAX_HEIGHT))
+    image = image.resize((int(args.width), int(args.height)))
     image_array = transform_image_to_ascii_2d_array(image)
     print_ascii(image, image_array)
 
