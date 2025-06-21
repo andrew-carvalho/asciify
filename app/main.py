@@ -12,11 +12,7 @@ def main():
 
     image = image.resize((MAX_WIDTH, MAX_HEIGHT))
     image_array = transform_image_to_ascii_2d_array(image)
-    
-    for y in range(0, image.height):
-        print()
-        for x in range(0, image.width):
-            print(image_array[y][x], end="")
+    print_ascii(image, image_array)
 
 def transform_image_to_ascii_2d_array(image):
     image_data = image.getdata()
@@ -41,6 +37,12 @@ def get_char_from_brightness_value(brightness_value):
     scale = RGB_RANGE / map_length
     index = int(brightness_value / scale) % map_length
     return CHAR_MAP[index]
+
+def print_ascii(image, image_array):
+    for y in range(0, image.height):
+        for x in range(0, image.width):
+            print(image_array[y][x], end="")
+        print()
 
 if __name__ == "__main__":
     main()
