@@ -1,10 +1,5 @@
 from PIL import Image
-
-char_map = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
-rgb_range = 255
-max_width = 640
-max_height = 480
-char_scale = 3
+from constants import CHAR_MAP, RGB_RANGE, MAX_WIDTH, MAX_HEIGHT, CHAR_SCALE
 
 def main():
     image = None
@@ -18,7 +13,7 @@ def main():
     print("Successfully loaded image!")
     print("Image size: " + str(image.width) + " x " + str(image.height))
 
-    image = image.resize((max_width, max_height))
+    image = image.resize((MAX_WIDTH, MAX_HEIGHT))
 
     image_array = transform_image_to_ascii_2d_array(image)
     print("Successfully constructed ASCII image!")
@@ -39,7 +34,7 @@ def transform_image_to_ascii_2d_array(image):
         for x in range(0, image.width):
             brightness_value = get_brightness_value_from_pixel(image_data.getpixel((x,y)))
             char = get_char_from_brightness_value(brightness_value)
-            image_array[y].append(char * char_scale)
+            image_array[y].append(char * CHAR_SCALE)
 
     return image_array
 
@@ -48,10 +43,10 @@ def get_brightness_value_from_pixel(rgb_values):
     return sum(rgb_values) / len(rgb_values)
 
 def get_char_from_brightness_value(brightness_value):
-    map_length = len(char_map)
-    scale = rgb_range / map_length
+    map_length = len(CHAR_MAP)
+    scale = RGB_RANGE / map_length
     index = int(brightness_value / scale) % map_length
-    return char_map[index]
+    return CHAR_MAP[index]
 
 if __name__ == "__main__":
     main()
