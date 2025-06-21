@@ -4,6 +4,7 @@ char_map = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
 rgb_range = 255
 max_width = 640
 max_height = 480
+char_scale = 3
 
 def main():
     image = None
@@ -38,7 +39,7 @@ def transform_image_to_ascii_2d_array(image):
         for x in range(0, image.width):
             brightness_value = get_brightness_value_from_pixel(image_data.getpixel((x,y)))
             char = get_char_from_brightness_value(brightness_value)
-            image_array[y].append(char)
+            image_array[y].append(char * char_scale)
 
     return image_array
 
